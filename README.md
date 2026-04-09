@@ -60,6 +60,8 @@ git clone https://github.com/multica-ai/multica.git
 cd multica
 cp .env.example .env
 # Edit .env — at minimum, change JWT_SECRET
+# If localhost:5432 is already used by another PostgreSQL instance,
+# change POSTGRES_PORT and DATABASE_URL together, for example to 5434.
 
 docker compose up -d                              # Start PostgreSQL
 cd server && go run ./cmd/migrate up && cd ..     # Run migrations

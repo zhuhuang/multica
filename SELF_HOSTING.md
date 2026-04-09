@@ -31,6 +31,14 @@ cp .env.example .env
 
 Edit `.env` with your production values (see [Configuration](#configuration) below), then:
 
+If your host machine already has PostgreSQL listening on `localhost:5432`, change
+both `POSTGRES_PORT` and `DATABASE_URL` in `.env` before starting Docker. Example:
+
+```bash
+POSTGRES_PORT=5433
+DATABASE_URL=postgres://multica:multica@localhost:5433/multica?sslmode=disable
+```
+
 ```bash
 # Start PostgreSQL
 docker compose up -d
@@ -129,6 +137,10 @@ docker compose up -d postgres
 ```
 
 This starts a `pgvector/pgvector:pg17` container on port 5432 with default credentials (`multica`/`multica`).
+
+If `5432` is already occupied on the host, set `POSTGRES_PORT` in `.env` to an
+unused port such as `5433` and keep `DATABASE_URL` in sync with that port before
+running `docker compose up -d postgres`.
 
 ### Using Your Own PostgreSQL
 
